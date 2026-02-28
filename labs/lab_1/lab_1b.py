@@ -37,14 +37,29 @@ def simple_calculator(operation: str, num1: float, num2: float) -> float:
     else:
         raise ValueError("Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'.")
 
+def persistNumbers(prompt: str) -> float:
+    while True:
+        try:
+            number = float(input(prompt))
+            return number
+        except:
+            print("Please enter a valid number")
+            
+def persistOperations(prompt: str) -> str:
+    while True:
+        operation = input(prompt).strip().lower()
+        if operation in ("add", "subtract", "multiply", "divide"):
+            return operation
+        print("Please enter a valid operation")
+
 def main():
     
     print(f"===== Simple Calculator =====")
 
     # Ask the user for sample input    
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
-    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+    num1 = persistNumbers("Enter the first number: ")
+    num2 = persistNumbers("Enter the second number: ")
+    operation = persistOperations("Enter the operation (add, subtract, multiply, divide): ")
 
     # Perform the calculation and display the result
     result = simple_calculator(operation, num1, num2)
